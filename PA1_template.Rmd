@@ -112,6 +112,7 @@ print(median_clone_total)
 The mean of total number of steps taken per day are 10766.19 and median are 10765
 
 #### Do these values differ from the estimates from the first part of the assignment?
+Yes, median values are differ, but not mean values, because of we fill NA values with mean data
 ```
 differ_data<-data.frame(Calculation=c('Without NA', 'Extrapolated'), Mean=c(mean_total, mean_clone_total), Median=c(median_total, median_clone_total))
 kable(head(differ_data), format = "markdown")
@@ -119,11 +120,12 @@ kable(head(differ_data), format = "markdown")
 
 |Calculation  |     Mean|    Median|
 |:------------|--------:|---------:|
-|Without NA   | 10766.19|     10765|
+|Without NA   | 10766.19|  10765.00|
 |Extrapolated | 10766.19|  10766.19|
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
+Create new columns wday and factorday to extract weekend days from others:
 ```
 weekend <- c('saturday','sunday')
 clone_data$wday<-tolower(weekdays(strptime(clone_data$date, '%Y-%m-%d')))

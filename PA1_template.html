@@ -204,6 +204,7 @@ print(median_clone_total)
 </div>
 <div id="do-these-values-differ-from-the-estimates-from-the-first-part-of-the-assignment" class="section level4">
 <h4>Do these values differ from the estimates from the first part of the assignment?</h4>
+<p>Yes, median values are differ, but not mean values, because of we fill NA values with mean data</p>
 <pre><code>differ_data&lt;-data.frame(Calculation=c('Without NA', 'Extrapolated'), Mean=c(mean_total, mean_clone_total), Median=c(median_total, median_clone_total))
 kable(head(differ_data), format = &quot;markdown&quot;)</code></pre>
 <table>
@@ -218,7 +219,7 @@ kable(head(differ_data), format = &quot;markdown&quot;)</code></pre>
 <tr class="odd">
 <td align="left">Without NA</td>
 <td align="right">10766.19</td>
-<td align="right">10765</td>
+<td align="right">10765.00</td>
 </tr>
 <tr class="even">
 <td align="left">Extrapolated</td>
@@ -231,6 +232,7 @@ kable(head(differ_data), format = &quot;markdown&quot;)</code></pre>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
+<p>Create new columns wday and factorday to extract weekend days from others:</p>
 <pre><code>weekend &lt;- c('saturday','sunday')
 clone_data$wday&lt;-tolower(weekdays(strptime(clone_data$date, '%Y-%m-%d')))
 clone_data$factorday &lt;- factor((clone_data$wday %in% weekend), labels=c('weekday','weekend'))
