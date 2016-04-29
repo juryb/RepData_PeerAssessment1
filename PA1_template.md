@@ -1,9 +1,4 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 #### load libraries
 ```
@@ -33,19 +28,17 @@ my_data <- data.table(read.csv("activity.csv", header=TRUE, na.strings="NA"))
 total_steps_by_date <-aggregate (steps ~ date,my_data,'sum',na.rm=TRUE)
 qplot(steps, data = total_steps_by_date,binwidth=1000) +
     ggtitle('Total number of steps / day')
+    
 ```
-![](~/RepData_PeerAssessment1/Rplot1.png)
-
 #### Calculate and report the mean and median total number of steps taken per day
 ```
 mean_total <- mean(total_steps_by_date$steps,na.rm=TRUE)
 median_total <- median(total_steps_by_date$steps,na.rm=TRUE)
 print(mean_total)
-  [1] 10766.19
 print(median_total)
-  [1] 10765
 ```
-
+[1] 10766.19
+[1] 10765
 
 The mean of total number of steps taken per day are 10766.19 and median are 10765.
 
@@ -62,15 +55,16 @@ average_steps_by_interval [ which.max(average_steps_by_interval $steps) ,]
 ```
 
 ```
-    interval    steps
+  interval    steps
 104      835 206.1698
 ```
 ## Imputing missing values
 #### Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 ```
 sum(is.na(my_data))
-            [1] 2304
 ```
+[1] 2304
+
 #### Devise a strategy for filling in all of the missing values in the dataset.
 I choose stragtegy to fill NA values with mean steps by interval
 
@@ -98,23 +92,18 @@ qplot(steps, data = clone_total_steps_by_date,binwidth=1000) +
 mean_clone_total <- mean(clone_total_steps_by_date$steps,na.rm=TRUE)
 median_clone_total <- median(clone_total_steps_by_date$steps,na.rm=TRUE)
 print(mean_clone_total)
-  [1] 10766.19
 print(median_clone_total)
-  [1] 10766.19
 ```
+[1] 10766.19
+[1] 10765
 
-The mean of total number of steps taken per day are 10766.19 and median are 10765
+The mean of total number of steps taken per day are 10766.19 and median are 10766.19
 
 #### Do these values differ from the estimates from the first part of the assignment?
-```
-differ_data<-data.frame(Calculation=c('Without NA', 'Extrapolated'), Mean=c(mean_total, mean_clone_total), Median=c(median_total, median_clone_total))
-kable(head(differ_data), format = "markdown")
-```
-
-|Calculation  |     Mean|    Median|
-|:------------|--------:|---------:|
-|Without NA   | 10766.19|     10765|
-|Extrapolated | 10766.19|  10766.19|
+|Calculation  |     Mean| Median|
+|:------------|--------:|------:|
+|Without NA   | 10766.19|  10765|
+|Extrapolated | 10766.19|  10765|
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
