@@ -34,7 +34,8 @@ total_steps_by_date <-aggregate (steps ~ date,my_data,'sum',na.rm=TRUE)
 qplot(steps, data = total_steps_by_date,binwidth=1000) +
     ggtitle('Total number of steps / day')
 ```
-![](~/RepData_PeerAssessment1/Rplot1.png)
+
+![plot1](Rplot1.png)
 
 #### Calculate and report the mean and median total number of steps taken per day
 ```
@@ -56,6 +57,9 @@ average_steps_by_interval <- aggregate (steps ~ interval, my_data,'mean',na.rm=T
 qplot(interval,steps, data=average_steps_by_interval )+geom_line()
 +labs(title="average number of steps taken, averaged across all days")
 ```
+
+![plot2](Rplot2.png)
+
 #### Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 ```
 average_steps_by_interval [ which.max(average_steps_by_interval $steps) ,]
@@ -93,6 +97,8 @@ qplot(steps, data = clone_total_steps_by_date,binwidth=1000) +
     ggtitle('Total number of steps / day')
 ```
 
+![plot3](Rplot3.png)
+
 #### Calculate and report the mean and median total number of steps taken per day
 ```
 mean_clone_total <- mean(clone_total_steps_by_date$steps,na.rm=TRUE)
@@ -119,10 +125,11 @@ kable(head(differ_data), format = "markdown")
 ## Are there differences in activity patterns between weekdays and weekends?
 
 ```
-
 weekend <- c('saturday','sunday')
 clone_data$wday<-tolower(weekdays(strptime(clone_data$date, '%Y-%m-%d')))
 clone_data$factorday <- factor((clone_data$wday %in% weekend), labels=c('weekday','weekend'))
 clone_steps_by_interval <- aggregate(steps ~ interval + factorday, clone_data, 'mean')
 qplot(interval,steps,data=clone_steps_by_interval,facets=factorday~.)+geom_line()
 ```
+
+![plot4](Rplot4.png)
